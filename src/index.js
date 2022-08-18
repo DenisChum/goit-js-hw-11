@@ -1,5 +1,5 @@
 import './sass/main.scss';
-import fetchPix from './js/fetch-pixabay';
+import fetchPix from './js/fetch-pix';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
@@ -15,28 +15,27 @@ arrowTop();
 
 //==============================================
 formAdd.addEventListener('submit', onFormSubmit);
-let searchingData = '';
+let searchingElem = '';
 let page = 1;
 let perPage = 0;
 
 async function onFormSubmit(event) {
   event.preventDefault();
-  console.log(event)
-
-  searchingData = event.currentTarget.searchQuery.value;
-  if (searchingData.trim() === '') {
-    Notify.failure('Будь-ласка введіть параметри пошуку');
+  // console.log(event)
+// Получаем значение инпута
+  searchingElem = event.currentTarget.searchQuery.value;  
+  if (searchingElem.trim() === '') {
+    Notify.failure('Please enter search parameters');
     return;
   }
-  const response = await fetchPix(searchingData, page);
+  const response = await fetchPix(searchingElem, page);
   perPage = response.hits.length;
-
+  // console.log(perPage)
   if (response.totalHits <= perPage) {
     addISHidden();
   } else {
     removeIsHidden();
   }
-
   if (response.totalHits === 0) {
     clearGalleryHTML();
     endcollectionText.classList.add('is-hidden');
@@ -62,7 +61,7 @@ async function loadMore() {
   try {
     btnLoadMore.disabled = true;
     pageIncrement();
-    const response = await fetchPix(searchingData, page);
+    const response = await fetchPix(searchingElem, page);
 
     renderCard(response.hits);
     perPage += response.hits.length;
@@ -105,9 +104,10 @@ function lightbox() {
   lightbox.refresh();
 }
 function renderCard(array) {
-  const cardMarkup = array.map(({largeImageURL,webformatURL,likes,views,comments,downloads,tags}) => `<div class='photo-card'>
+  const cardMarkup = array.map(({ largeImageURL, webformatURL, likes, views, comments, downloads, tags }) => 
+  `<div class='photo-card'>
     <a class="gallery__item" href='${largeImageURL}'>
-        <img src='${webformatURL}' alt='${tags}' loading="lazy" width="368" height="242"/>
+      <img src='${webformatURL}' alt='${tags}' loading="lazy" width="368" height="242"/>
     </a>
     <div class="info">
     <p class="info-item">

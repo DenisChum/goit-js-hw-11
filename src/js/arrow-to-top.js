@@ -10,7 +10,6 @@ export default function arrowToTop() {
         goTopBtn.classList.remove('back_to_top-show');
       }
     }
-  
     function backToTop() {
       if (window.pageYOffset > 0) {
         window.scrollBy(0, -80);
@@ -19,7 +18,6 @@ export default function arrowToTop() {
     }
   
     const goTopBtn = document.querySelector('.back_to_top');
-  
     window.addEventListener('scroll', trackScroll);
     goTopBtn.addEventListener('click', backToTop);
   };
