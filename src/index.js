@@ -1,19 +1,19 @@
 import './sass/main.scss';
-import fetchPixabay from './js/fetch-pixabay';
+import fetchPix from './js/fetch-pixabay';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import scroll from './js/scroll';
-import arrowToTop from './js/arrow-to-top';
+import arrowTop from './js/arrow-to-top';
 
-arrowToTop();
+arrowTop();
 
   const formAdd= document.querySelector('#search-form')
   const gallery= document.querySelector('.gallery')
   const btnLoadMore= document.querySelector('.load-more')
   const endcollectionText= document.querySelector('.end-collection-text')
 
-// =============onFormSubmit=============
+//==============================================
 formAdd.addEventListener('submit', onFormSubmit);
 let searchingData = '';
 let page = 1;
@@ -21,14 +21,14 @@ let perPage = 0;
 
 async function onFormSubmit(event) {
   event.preventDefault();
+  console.log(event)
 
   searchingData = event.currentTarget.searchQuery.value;
-  page = 1;
   if (searchingData.trim() === '') {
     Notify.failure('Будь-ласка введіть параметри пошуку');
     return;
   }
-  const response = await fetchPixabay(searchingData, page);
+  const response = await fetchPix(searchingData, page);
   perPage = response.hits.length;
 
   if (response.totalHits <= perPage) {
@@ -55,14 +55,14 @@ async function onFormSubmit(event) {
     console.log(error);
   }
 }
-// ===============================loadMore========================
+// =========================================
 btnLoadMore.addEventListener('click', loadMore);
 
 async function loadMore() {
   try {
     btnLoadMore.disabled = true;
     pageIncrement();
-    const response = await fetchPixabay(searchingData, page);
+    const response = await fetchPix(searchingData, page);
 
     renderCard(response.hits);
     perPage += response.hits.length;
@@ -80,7 +80,7 @@ async function loadMore() {
   }
 }
 
-// ===================API=====================
+// =======================================
 function addISHidden() {
   btnLoadMore.classList.add('is-hidden');
   endcollectionText.classList.remove('is-hidden');
