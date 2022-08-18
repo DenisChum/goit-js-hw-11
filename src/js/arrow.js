@@ -1,5 +1,4 @@
 export default function arrowToTop() {
-  
     function trackScroll() {
       const scrolled = window.pageYOffset;
       const coords = document.documentElement.clientHeight;
@@ -16,7 +15,6 @@ export default function arrowToTop() {
         setTimeout(backToTop, 0);
       }
     }
-  
     const goTopBtn = document.querySelector('.back_to_top');
     window.addEventListener('scroll', trackScroll);
     goTopBtn.addEventListener('click', backToTop);

@@ -14,7 +14,13 @@ arrowTop();
   const endcollectionText= document.querySelector('.end-collection-text')
 
 //==============================================
-formAdd.addEventListener('submit', onFormSubmit);
+// очищаем галлерею, при сабмите, запускаем функцию Онформсабмит,при этом убираем кнопку.
+formAdd.addEventListener('submit', event => {
+  gallery.innerHTML = '';
+  onFormSubmit(event);
+  btnLoadMore.classList.add('is-hidden');
+});
+
 let searchingElem = '';
 let page = 1;
 let perPage = 0;
@@ -48,7 +54,7 @@ async function onFormSubmit(event) {
       Notify.info(`Hooray! We found ${response.totalHits} images`);
       clearGalleryHTML();
       renderCard(response.hits);
-      formAdd.reset()
+      // formAdd.reset()
     }
   } catch (error) {
     console.log(error);
