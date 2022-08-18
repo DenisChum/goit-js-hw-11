@@ -1,6 +1,6 @@
 import './sass/main.scss';
 import fetchPixabay from './js/fetch-pixabay';
-import cardTemplate from './template-card.hbs';
+// import cardTemplate from '';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
