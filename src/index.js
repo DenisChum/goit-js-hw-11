@@ -18,7 +18,7 @@ arrowTop();
 formAdd.addEventListener('submit', event => {
   gallery.innerHTML = '';
   onFormSubmit(event);
-  btnLoadMore.classList.add('is-hidden');
+  // btnLoadMore.classList.add('is-hidden');
 });
 
 let searchingElem = '';
@@ -33,15 +33,17 @@ async function onFormSubmit(event) {
   if (searchingElem.trim() === '') {
     Notify.failure('Please enter search parameters');
     return;
-  }
+  } page = 1;
   const response = await fetchPix(searchingElem, page);
   perPage = response.hits.length;
   // console.log(perPage)
-  if (response.totalHits <= perPage) {
+  console.log(page)
+  // console.log(response.totalHits)
+  if (response.totalHits <= perPage*page) {
     addISHidden();
   } else {
     removeIsHidden();
-  }
+  } 
   if (response.totalHits === 0) {
     clearGalleryHTML();
     endcollectionText.classList.add('is-hidden');
@@ -63,12 +65,13 @@ async function onFormSubmit(event) {
 // =========================================
 btnLoadMore.addEventListener('click', loadMore);
 
+
 async function loadMore() {
   try {
     btnLoadMore.disabled = true;
     pageIncrement();
+   console.log(page);
     const response = await fetchPix(searchingElem, page);
-
     renderCard(response.hits);
     perPage += response.hits.length;
     scroll();
@@ -78,14 +81,16 @@ async function loadMore() {
         "We're sorry, but you've reached the end of search results."
       );
       addISHidden();
-    }
+    }  
     btnLoadMore.disabled = false;
   } catch (error) {
     console.log(error);
   }
 }
 
-// =======================================
+
+
+//=======================================
 function addISHidden() {
   btnLoadMore.classList.add('is-hidden');
   endcollectionText.classList.remove('is-hidden');
