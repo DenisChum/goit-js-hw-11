@@ -4,7 +4,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import scroll from './js/scroll';
-import arrowTop from './js/arrow-to-top';
+import arrowTop from './js/arrow';
 
 arrowTop();
 

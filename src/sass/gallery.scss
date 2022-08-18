@@ -49,4 +49,9 @@
   display: inline-block;
   font-size: 14px;
   border-radius: 50px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: rgb(126, 80, 147);
 }
