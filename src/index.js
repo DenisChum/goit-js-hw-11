@@ -1,6 +1,5 @@
 import './sass/main.scss';
 import fetchPixabay from './js/fetch-pixabay';
-// import cardTemplate from '';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
@@ -50,6 +49,7 @@ async function onFormSubmit(event) {
       Notify.info(`Hooray! We found ${response.totalHits} images`);
       clearGalleryHTML();
       renderCard(response.hits);
+      formAdd.reset()
     }
   } catch (error) {
     console.log(error);
@@ -105,7 +105,25 @@ function lightbox() {
   lightbox.refresh();
 }
 function renderCard(array) {
-  const cardMarkup = array.map(item => cardTemplate(item)).join('');
+  const cardMarkup = array.map(({largeImageURL,webformatURL,likes,views,comments,downloads,tags}) => `<div class='photo-card'>
+    <a class="gallery__item" href='${largeImageURL}'>
+        <img src='${webformatURL}' alt='${tags}' loading="lazy" width="368" height="242"/>
+    </a>
+    <div class="info">
+    <p class="info-item">
+      <b>Likes </br><span class='text'>${likes}</span></b>
+    </p>
+    <p class="info-item">
+      <b>Views  </br><span class='text'>${views}</span></b>
+    </p>
+    <p class="info-item">
+      <b>Comments  </br><span class='text'>${comments}</span></b>
+    </p>
+    <p class="info-item">
+      <b>Downloads  </br><span class='text'>${downloads}</span></b>
+    </p>
+  </div>
+</div>`).join('');
   gallery.insertAdjacentHTML('beforeend', cardMarkup);
   lightbox();
 }
