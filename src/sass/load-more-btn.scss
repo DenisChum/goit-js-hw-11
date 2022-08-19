@@ -1,23 +1,27 @@
 .load-more {
-    display: block;
-    background-color: #69bdd6;
-    margin: 0 auto;
-    border: none;
-    color: white;
-    padding: 7px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 14px;
+  display: block;
+  background-color: #69bdd6;
+  margin: 0 auto;
+  border: none;
+  color: white;
+  padding: 7px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.load-more:hover {
+  background-color: rgb(6, 158, 189);
 }
 
 .is-hidden {
-    display: none;
+  display: none;
 }
 
 .end-collection-text {
-    text-align: center;
-    font-size: 16px;
-    font-weight: 700;
-    padding-top: 20px;
-    padding-bottom: 20px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
