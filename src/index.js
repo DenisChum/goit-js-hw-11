@@ -35,6 +35,7 @@ async function onFormSubmit(event) {
     return;
   } page = 1;
   const response = await fetchPix(searchingElem, page);
+  btnLoadMore.classList.add('is-hidden');
   perPage = response.hits.length;
   // console.log(perPage)
   console.log(page)
