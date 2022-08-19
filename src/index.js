@@ -18,7 +18,7 @@ arrowTop();
 formAdd.addEventListener('submit', event => {
   gallery.innerHTML = '';
   onFormSubmit(event);
-  // btnLoadMore.classList.add('is-hidden');
+  btnLoadMore.classList.add('is-hidden');
 });
 
 let searchingElem = '';
@@ -39,7 +39,7 @@ async function onFormSubmit(event) {
   // console.log(perPage)
   console.log(page)
   // console.log(response.totalHits)
-  if (response.totalHits <= perPage*page) {
+  if (response.totalHits <= perPage) {   
     addISHidden();
   } else {
     removeIsHidden();
@@ -87,8 +87,6 @@ async function loadMore() {
     console.log(error);
   }
 }
-
-
 
 //=======================================
 function addISHidden() {
