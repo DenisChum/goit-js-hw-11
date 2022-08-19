@@ -70,6 +70,7 @@ btnLoadMore.addEventListener('click', loadMore);
 async function loadMore() {
   try {
     btnLoadMore.disabled = true;
+    // btnLoadMore.classList.add('is-hidden');
     pageIncrement();
    console.log(page);
     const response = await fetchPix(searchingElem, page);
